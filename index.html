@@ -16,10 +16,15 @@
   			<div class="jumbotron">Peanut Gets Wet!
   			</div>
         <div id="mainBody">
-
-  			 <div>
-  				<select class='selectpicker' id="dayMenu">
-  					<option selected disabled>Select Day to View Forecast</option>
+          <div class="row">
+            <div class="col-md-1">
+            </div>
+            <div class="col-md 4">
+         <form>
+         <div>
+          <label for="dayMenu">Select Day</label><br>
+  				<select class="selectpicker" id="dayMenu">
+  					<option selected disabled>Day</option>
   					<option>Sunday</option>
   					<option>Monday</option>
   					<option>Tuesday</option>
@@ -29,15 +34,33 @@
   					<option>Saturday</option>
   				</select>
   			 </div>
+         <div class="col-md-6">
+         </div>
+       </div>
 
-  			 <div>
-  				<input type="text" autocomplete="on" placeholder="Type Location to View Forecast" id="locus">
+  			 <div class="row">
+          <div class="col-md-1">
+          </div>
+         <div>
+          <label for="locus">Enter Location</label><br>
+  				<input type="text" autocomplete="on" placeholder=" Location" id="locus">
   			 </div>
-         <div id="dog">
-  			 <img src="dog.png">weather overhead
+        </form>
         </div>
-  			 <img src="">pnut picture
-  			 <img src="">clothing overlay
+
+        <div class="col-md-6">
+        </div>
+      </div>
+      <div id="button">
+        <button class="btn btn-info">View Forecast</button>
+      </div>
+
+         <div id="dog">
+  			 <img src="dog.png">
+        </div>
+        <div id="weather">
+  			 <img src="clouds.png">
+        </div>
 
 
   			 <div id="advice">

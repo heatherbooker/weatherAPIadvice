@@ -3,10 +3,10 @@
 	width:200px;
 	background-color: #A2DBD4;
 	border-radius: 4px;
-	float: right;
 	border: solid black 1px;
-	position: relative;
-	right: 10px;
+	position: absolute;
+	left: 1000px;
+	bottom: 100px;
 }
 .jumbotron {
 	background-color: #7DE0F5;
@@ -31,10 +31,42 @@
 	height: 388px;
 	margin-top: 0px;
 }
-#dog {
-	height: 60px;
-	margin: 5px;
-}
 img {
 	max-height: 100%;
+}
+#dog {
+	height: 200px;
+	margin: 5px;
+	position: relative;
+	left: 400px;
+	top: -60px;
+}
+#weather {
+	height: 100px;
+	margin: 5px;
+	position: relative;
+	left: 400px;
+	bottom: 370px;
+}
+.selectpicker {
+	position: relative;
+	left: 30px;
+	margin-bottom: 10px;
+}
+input {
+	position: relative;
+	border-radius: 4px;
+	left: 35px;
+	margin: 10px;
+	height: 8%;
+	width: 220px;
+}
+form {
+	position: relative;
+	top: 10px;
+}
+button {
+	margin: 10px;
+	position: relative;
+	left: 20px;
 }
