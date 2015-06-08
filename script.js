@@ -27,12 +27,13 @@ $(document).ready(function() {
                 request.setRequestHeader("x-api-key", "47801ec2546320154de9cf8c92afef22");
             },
             type: "GET",
-            url: "api.openweathermap.org/data/2.5/forecast?q=London",
+            dataType: "jsonp",
+            url: "http://api.openweathermap.org/data/2.5/weather?q=London,ca&cnt=7",
             success: function(data) {
                 console.log(data);
             },
             error: function(err) {
-                console.log("ERROR" + err.stringify);
+                console.log("ERROR " + JSON.stringify(err));
             }
         });
 
