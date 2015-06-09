@@ -1,3 +1,5 @@
+// Code goes here
+
 $(document).ready(function() {
 
     $('button').click(function() {
@@ -21,16 +23,18 @@ $(document).ready(function() {
 
 
 
-        //reference API
+        //reference API 
         $.ajax({
             beforeSend: function(request) {
                 request.setRequestHeader("x-api-key", "47801ec2546320154de9cf8c92afef22");
             },
             type: "GET",
             dataType: "jsonp",
-            url: "http://api.openweathermap.org/data/2.5/weather?q=London,ca&cnt=7",
+            url: "http://api.openweathermap.org/data/2.5/weather?q=" + location,
             success: function(data) {
+                window.data = data;
                 console.log(data);
+                getDayObject(data, 'whatever')
             },
             error: function(err) {
                 console.log("ERROR " + JSON.stringify(err));
@@ -38,11 +42,11 @@ $(document).ready(function() {
         });
 
         function getDayObject(data, dayToForecast) {
-            for (var i = 0; i < 7; i++) {
-                if (dayToForecast === data[i].day_of_week) {
-                    console.log('getting there');
-                }
-            }
+            var mainWeather = data.weather[0].main;
+            document.getElementById('advice').innerHTML = 'ADVICE <br>' + mainWeather;
+            var icon = data.weather[0].icon;
+            console.log(icon);
+            document.getElementById('weather').innerHTML = '<img src="' + 'http://openweathermap.org/img/w/' + icon + '.png">';
         }
 
     });
