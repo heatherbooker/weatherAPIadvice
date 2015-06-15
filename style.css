@@ -11,6 +11,11 @@
 	left: 850px;
 	bottom: 450px;
 }
+#locationLabel {
+	position: relative;
+	left: -600px;
+	top: 5px;
+}
 .jumbotron {
 	background-color: #7DE0F5;
 	font-size: 40pt;

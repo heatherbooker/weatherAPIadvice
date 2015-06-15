@@ -9,18 +9,15 @@ $(document).ready(function() {
         var daySelected = $('#dayMenu').val();
         var dayToForecast = "";
 
-        // function shortenDayName(day) {
-        //     if (day === "Sunday") {
-        //         dayToForecast = "Sun";
-        //     } else if (day === "Wednesday") {
-        //         dayToForecast = "Wed";
-        //     }
-        // }
-        // shortenDayName(day);
-
         var date = new Date();
         var day = date.getDay();
-        var name = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"][day];
+        var name = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+
+        for (var i = 0; i < 7; i++) {
+            if (name[day - 1 + i] === daySelected) {
+                dayToForecast = -1 + i;
+            };
+        };
 
 
         //get location to check forecast for
@@ -30,13 +27,11 @@ $(document).ready(function() {
 
         var cityInList = (citySearcher.search(location));
         if (typeof cityInList === "object") {
-            console.log(cityInList);
-            //use id instead of name to look up, in case of name having spaces --> invalid url
+            //use id instead of name to look up, in case of name having spaces which would cause invalid url
             var locationCode = cityInList.id;
             var weatherMan = new WeatherMan;
-            weatherMan.callWeatherApi(location, locationCode);
+            weatherMan.callWeatherApi(location, locationCode, dayToForecast, daySelected);
         } else {
-            console.log(cityInList);
             alert("Invalid City Name");
         };
 
@@ -47,18 +42,18 @@ $(document).ready(function() {
 function WeatherMan() {
 
     return {
-        callWeatherApi: function(location, locationCode) {
+        callWeatherApi: function(location, locationCode, dayToForecast, dayName) {
             $.ajax({
                 beforeSend: function(request) {
                     request.setRequestHeader("x-api-key", "47801ec2546320154de9cf8c92afef22");
                 },
                 type: "GET",
                 dataType: "jsonp",
-                url: "http://api.openweathermap.org/data/2.5/weather?id=" + locationCode + "&cnt=7",
+                url: "http://api.openweathermap.org/data/2.5/forecast/daily?id=" + locationCode + "&cnt=7",
                 success: function(data) {
                     window.data = data;
                     console.log(data);
-                    reportWeather(data, 'whatever');
+                    reportWeather(data, dayName, dayToForecast);
                 },
                 error: function(err) {
                     console.log("ERROR " + JSON.stringify(err));
@@ -66,10 +61,10 @@ function WeatherMan() {
                 }
             });
 
-            function reportWeather(data, dayToForecast) {
-                var mainWeather = data.weather[0].main;
-                document.getElementById('advice').innerHTML = 'FORECAST for<br>' + location + ': <br>' + mainWeather;
-                var icon = data.weather[0].icon;
+            function reportWeather(data, dayName, dayToForecast) {
+                var mainWeather = data.list[dayToForecast].weather[0].main;
+                document.getElementById('advice').innerHTML = 'FORECAST for<br>' + location + ' for<br>' + dayName + ': <br>' + mainWeather;
+                var icon = data.list[dayToForecast].weather[0].icon;
                 document.getElementById('weather').innerHTML = '<img src="' + 'http://openweathermap.org/img/w/' + icon + '.png">';
             }
         },
